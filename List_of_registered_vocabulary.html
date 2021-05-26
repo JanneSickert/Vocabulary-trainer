@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>List</title>
+	<meta name="author" content="Janne">
+    <link href="Style.css" rel="stylesheet">
+  </head>
+  <body>
+    <script src="programm.js"></script>
+    <script src="database.js"></script>
+    <script src="UserInterface.js"></script>
+    <button onclick="jumpBack()">Zurück</button>
+    <script>
+      function tags(nr) {
+        if (nr == 0) {
+          document.write("<table width=\"100%\" border=\"1\" cellpadding=\"0\" cellspacing=\"2\">")
+        } else {
+          document.write("</table>")
+        }
+      }
+      function pri(a, b) {
+        document.write("<tr>")
+        document.write("<td>" + a + "</td>")
+        document.write("<td>" + b + "</td>")
+        document.write("</tr>")
+      }
+      tags(0)
+      pri(KIND[0], KIND[1])
+	  setSize(DATA.length);
+	  for (var i = 0; i < getSize(); i++) {
+		add(DATA[i][0], DATA[i][1]);
+	  }
+	  makeCons()
+	  arr.forEach(function (word) {
+		pri(word.getWort, word.getFormel);
+      });
+      tags(1)
+    </script>
+  </body>
+</html>

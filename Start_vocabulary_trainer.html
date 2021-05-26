@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Trainer</title>
+		<meta name="author" content="Janne">
+		<link href="Style.css" rel="stylesheet">
+	</head>
+	<body>
+		<script src="programm.js"></script>
+		<script src="database.js"></script>
+		<script src="UserInterface.js"></script>
+		<script>
+			function resetTrainer() {
+				try {
+					localStorage.clear();
+				} catch {
+					alert(globalText.storageError)
+				}
+			}
+			function readTrainer(id) {
+				var output
+				try {
+					output = localStorage.getItem(id);
+				} catch {
+					alert(globalText.storageError)
+				}
+				return output
+			}
+			function setTrainer(id, value) {
+				var sid = "" + id
+				try {
+					localStorage.setItem(sid, value);
+				} catch {
+					alert(globalText.storageError)
+				}
+			}
+			function uiResetTrainer() {
+				var keyWord = "Reset"
+				var o = prompt("Schreibe " + keyWord + " um den fortschritt zurück zu setzen.");
+				if (o === keyWord) {
+					resetTrainer()
+					alert("Der fortschritt wurde gelöscht.");
+				} else {
+					alert("Der fortschritt wurde beibehalten.");
+				}
+			}
+			setStorageFoo(resetTrainer, readTrainer, setTrainer)
+			setSize(DATA.length);
+			for (var i = 0; i < getSize(); i++) {
+				add(DATA[i][0], DATA[i][1]);
+			}
+		</script>
+			<h2><u>Einstellungen</u></h2>
+				<button id="p1" onclick="askOnlyForeignWordsButton()">Nur nach Fremdwörtern Fragen</button>
+				<button id="p2" onclick="askBrackedContentButton()">Frage nach geklammerten Inhalten</button>
+		  		<button id="p3" onclick="askTheSourtestWordButton()">Frage nach dem kürtzesten der beiden Wörter</button>
+			<br><br>
+			<h2><u>Starte Programme</u></h2>
+				<button onclick="startQuiz(green)">Starte Quiz</button>
+				<button onclick="showVokab()">Zeige alle Vokabeln</button>
+				<button onclick="uiResetTrainer()">Reset Trainer</button>
+			<h2><u>Dialogfeld Befehle</u></h2>
+			<b>END</b> : Beendet das Dialogfeld
+		<script>
+			setDefaultColor()
+		</script>
+	</body>
+</html>
