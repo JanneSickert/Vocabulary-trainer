@@ -11,7 +11,21 @@
     <script src="database.js"></script>
     <script src="UserInterface.js"></script>
 	<script src="languages.js"></script>
-    <button onclick="jumpBack()">Zurück</button>
+	<script>
+	  try {
+		len = localStorage.getItem(1001);
+	  } catch {
+		alert(globalText.storageError)
+		len = "en"
+	  }
+	  if (len === "de") {
+		setGlobalText(globalText.deutsch)
+	  } else {
+		setGlobalText(globalText.inglish)
+	  }
+	  var strTxt = globalText.lorv
+	</script>
+    <button onclick="jumpBack()"><script>document.write(strTxt[0])</script></button>
     <script>
       function tags(nr) {
         if (nr == 0) {

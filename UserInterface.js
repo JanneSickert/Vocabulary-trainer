@@ -4,7 +4,7 @@ var green = {
 	askTheSourtestWord: false
 }
 
-var len = "de"
+var len = null
 
 function changeColor(theColor, id) {
 	var elem = document.getElementById(id)
@@ -44,14 +44,6 @@ function askTheSourtestWordButton() {
 	} else {
 		green.askTheSourtestWord = true
 		changeColor('green', "p3")
-	}
-}
-
-function setNewLanguage() {
-	if (len === de) {
-		len = "en"
-	} else {
-		len = "de"
 	}
 }
 

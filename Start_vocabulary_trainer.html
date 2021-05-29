@@ -13,11 +13,6 @@
 		<script src="languages.js"></script>
 		<script>
 			setMaxPoints(aPoints)
-			if (len === "de") {
-				setGlobalText(globalText.deutsch)
-			} else {
-				setGlobalText(globalText.inglish)
-			}
 			function resetTrainer() {
 				try {
 					localStorage.clear();
@@ -42,6 +37,29 @@
 					alert(globalText.storageError)
 				}
 			}
+			function setNewLanguage() {
+				if (len === "de") {
+					len = "en"
+					setTrainer(1001, "en")
+				} else {
+					len = "de"
+					setTrainer(1001, "de")
+				}
+				location.reload(true)
+			}
+			var il = readTrainer(1001)
+			if (il === "de") {
+				len = "de"
+				setTrainer(1001, "de")
+			} else {
+				len = "en"
+				setTrainer(1001, "en")
+			}
+			if (len === "de") {
+				setGlobalText(globalText.deutsch)
+			} else {
+				setGlobalText(globalText.inglish)
+			}
 			function uiResetTrainer() {
 				var keyWord = "Reset"
 				var o = prompt(globalText.write + keyWord + globalText.resetToDo)
@@ -57,19 +75,20 @@
 			for (var i = 0; i < getSize(); i++) {
 				add(DATA[i][0], DATA[i][1]);
 			}
+			var strTxt = globalText.svt
 		</script>
-			<h2><u>Einstellungen</u></h2>
-				<button id="p1" onclick="askOnlyForeignWordsButton()">Nur nach Fremdwörtern Fragen</button>
-				<button id="p2" onclick="askBrackedContentButton()">Frage nach geklammerten Inhalten</button>
-		  		<button id="p3" onclick="askTheSourtestWordButton()">Frage nach dem kürtzesten der beiden Wörter</button>
-				<button id="p4" onclick="setNewLanguage()">neue Sprache</button>
+			<h2><u><script>document.write(strTxt[0])</script></u></h2>
+				<button id="p1" onclick="askOnlyForeignWordsButton()"><script>document.write(strTxt[1])</script></button><br>
+				<button id="p2" onclick="askBrackedContentButton()"><script>document.write(strTxt[2])</script></button><br>
+		  		<button id="p3" onclick="askTheSourtestWordButton()"><script>document.write(strTxt[3])</script></button><br>
+				<button id="p4" onclick="setNewLanguage()"><script>document.write(strTxt[4])</script></button>
 			<br><br>
-			<h2><u>Starte Programme</u></h2>
-				<button onclick="startQuiz(green)">Starte Quiz</button>
-				<button onclick="showVokab()">Zeige alle Vokabeln</button>
-				<button onclick="uiResetTrainer()">Reset Trainer</button>
-			<h2><u>Dialogfeld Befehle</u></h2>
-			<b>END</b> : Beendet das Dialogfeld
+			<h2><u><script>document.write(strTxt[5])</script></u></h2>
+				<button onclick="startQuiz(green)"><script>document.write(strTxt[6])</script></button><br>
+				<button onclick="showVokab()"><script>document.write(strTxt[7])</script></button><br>
+				<button onclick="uiResetTrainer()">Reset Trainer</button><!--same in all languages-->
+			<h2><u><script>document.write(strTxt[8])</script></u></h2>
+			<b>END</b> : <script>document.write(strTxt[9])</script>
 		<script>
 			setDefaultColor()
 		</script>
