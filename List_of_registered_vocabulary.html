@@ -10,6 +10,7 @@
     <script src="programm.js"></script>
     <script src="database.js"></script>
     <script src="UserInterface.js"></script>
+	<script src="languages.js"></script>
     <button onclick="jumpBack()">Zurück</button>
     <script>
       function tags(nr) {
@@ -26,7 +27,11 @@
         document.write("</tr>")
       }
       tags(0)
-      pri(KIND[0], KIND[1])
+      if (len === "de") {
+		pri(de_KIND[0], de_KIND[1])
+	  } else {
+		pri(en_KIND[0], en_KIND[1])
+	  }
 	  setSize(DATA.length);
 	  for (var i = 0; i < getSize(); i++) {
 		add(DATA[i][0], DATA[i][1]);

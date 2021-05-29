@@ -1,18 +1,11 @@
 // Settings
-const MAX_POINTS = 3
+var MAX_POINTS
 var SHOW_BRACKETED_CONTENT = true
-const KIND = ["die Beschreibung", "das Fachwort"]
+var KIND
 var ANSWER_SHORTEST_WORD = true
 // --------
 
-var globalText = {
-    wort: "Was ist " + KIND[0] + ": ",
-    formel: "Was ist " + KIND[1] + ": ",
-    finish: "Fertig! Du hast bei jedem Wort " + MAX_POINTS + " Punkte geschafft.",
-    nextLevel: "NEXT LEVEL: Now you only need to ask for foreign words",
-	currentPointsText: "Aktueller Punktestand: ",
-	storageError: "ERROR: Es kann nicht auf den localStorage zugekriffen werden!"
-}
+var globalText
 var arr = new Array()
 var isActiv
 var nextMessageSent = true
@@ -25,6 +18,10 @@ var unchecktArr = []
 var varResetTrainer
 var varReadTrainer
 var varSetTrainer
+
+function setGlobalText(pText) {
+	globalText = pText
+}
 
 function setStorageFoo(resetTrainer, readTrainer, setTrainer) {
     varResetTrainer = resetTrainer
@@ -66,6 +63,14 @@ var deleteDoubleEntrys = function (oldArray) {
 		}
 	}
 	return resultArr
+}
+
+function setMaxPoints(pPoints) {
+	MAX_POINTS = pPoints
+}
+
+function setKIND(pKind) {
+	KIND = pKind
 }
 
 function store(id, value) {
@@ -214,33 +219,33 @@ function eql(user, system) {
 }
 
 function askFormel(i) {
-    var input1 = prompt(globalText.formel + arr[i].getWort);
+    var input1 = prompt(globalText.formel + arr[i].getWort)
     if (input1 === "END") {
 		isActiv = false
 	} else {
 		if (eql(input1, arr[i].getFormel)) {
-			arr[i].upDownPunkte("Up");
-			alert("Right! " + String(arr[i].getPunkte) + " Punkte");
+			arr[i].upDownPunkte("Up")
+			alert(globalText.right + " " + String(arr[i].getPunkte) + " " + globalText.points)
 		} else {
-			arr[i].upDownPunkte("down");
-			alert("False! " + String(arr[i].getPunkte) + " Punkte");
-			alert(arr[i].getWort + " << >> " + arr[i].getFormel);
+			arr[i].upDownPunkte("down")
+			alert(globalText.tfalse + " " + String(arr[i].getPunkte) + " " + globalText.points)
+			alert(arr[i].getWort + " << >> " + arr[i].getFormel)
 		}
 	}
 }
 
 function askWort(i) {
-    var input1 = prompt(globalText.wort + arr[i].getFormel);
+    var input1 = prompt(globalText.wort + arr[i].getFormel)
     if (input1 === "END") {
 		isActiv = false
 	} else {
 		if (eql(input1, arr[i].getWort)) {
-			arr[i].upDownPunkte("Up");
-			alert("Right! " + String(arr[i].getPunkte) + " Punkte");
+			arr[i].upDownPunkte("Up")
+			alert(globalText.right + " " + String(arr[i].getPunkte) + " " + globalText.points)
 		} else {
-			arr[i].upDownPunkte("down");
-			alert("False! " + String(arr[i].getPunkte) + " Punkte");
-			alert(arr[i].getFormel + " << >> " + arr[i].getWort);
+			arr[i].upDownPunkte("down")
+			alert(globalText.tfalse + " " + String(arr[i].getPunkte) + " " + globalText.points)
+			alert(arr[i].getFormel + " << >> " + arr[i].getWort)
 		}
 	}
 }
@@ -281,12 +286,12 @@ function updateCurrentPoints() {
 function score(cardNr) {
     if (interval==0) {
         var allPoints = MAX_POINTS * data_length;
-	updateCurrentPoints()
-	cardNr = cardNr+1
-        alert("Karte: " + cardNr + ", Konto: " + currentPoints + " von " + allPoints + " Punkten")
-	interval = 4
+		updateCurrentPoints()
+		cardNr = cardNr + 1
+		alert(globalText.card + cardNr + globalText.account + currentPoints + globalText.from + allPoints + globalText.mpoints)
+		interval = 4
     } else {
-	interval = interval-1
+		interval = interval - 1
     }
 }
 

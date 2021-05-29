@@ -10,7 +10,14 @@
 		<script src="programm.js"></script>
 		<script src="database.js"></script>
 		<script src="UserInterface.js"></script>
+		<script src="languages.js"></script>
 		<script>
+			setMaxPoints(aPoints)
+			if (len === "de") {
+				setGlobalText(globalText.deutsch)
+			} else {
+				setGlobalText(globalText.inglish)
+			}
 			function resetTrainer() {
 				try {
 					localStorage.clear();
@@ -37,12 +44,12 @@
 			}
 			function uiResetTrainer() {
 				var keyWord = "Reset"
-				var o = prompt("Schreibe " + keyWord + " um den fortschritt zurück zu setzen.");
+				var o = prompt(globalText.write + keyWord + globalText.resetToDo)
 				if (o === keyWord) {
 					resetTrainer()
-					alert("Der fortschritt wurde gelöscht.");
+					alert(globalText.tdel)
 				} else {
-					alert("Der fortschritt wurde beibehalten.");
+					alert(globalText.keep)
 				}
 			}
 			setStorageFoo(resetTrainer, readTrainer, setTrainer)
@@ -55,6 +62,7 @@
 				<button id="p1" onclick="askOnlyForeignWordsButton()">Nur nach Fremdwörtern Fragen</button>
 				<button id="p2" onclick="askBrackedContentButton()">Frage nach geklammerten Inhalten</button>
 		  		<button id="p3" onclick="askTheSourtestWordButton()">Frage nach dem kürtzesten der beiden Wörter</button>
+				<button id="p4" onclick="setNewLanguage()">neue Sprache</button>
 			<br><br>
 			<h2><u>Starte Programme</u></h2>
 				<button onclick="startQuiz(green)">Starte Quiz</button>
