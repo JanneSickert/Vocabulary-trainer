@@ -1,16 +1,14 @@
-// Settings
 var MAX_POINTS
 var SHOW_BRACKETED_CONTENT = true
 var KIND
 var ANSWER_SHORTEST_WORD = true
-// --------
-
 var globalText
 var arr = new Array()
 var isActiv
 var nextMessageSent = true
 var currentPoints = 0
-var onlyEnglishQuest = true	// Just ask for KIND[0] words
+var descriptionQuest
+var termQuest
 var data_length
 var nextIndex = 0
 var interval = 1
@@ -276,7 +274,7 @@ function updateCurrentPoints() {
 	countAllCurrentPoints()
 	if (getSize() <= currentPoints) {
 		if (nextMessageSent) {
-			onlyEnglishQuest = true
+			descriptionQuest = true
 			alert(globalText.nextLevel)
 			nextMessageSent = false
 		}
@@ -298,12 +296,16 @@ function score(cardNr) {
 function makeQuiz() {
     var aa = function(nr) {
         switch (nr) {
-            case 0: askFormel(i)
+            case 0: askFormel(i)//term
                 break
-            case 1: askWort(i)
+            case 1: askWort(i)// description
                 break
         }
     }
+	var askRandom = function() {
+		var randomNr = Math.round(Math.random());
+        aa(randomNr)
+	}
     var stop = getSize();
     for (var i = 0; i < stop; i++) {
 		if (!isActiv) {
@@ -317,12 +319,17 @@ function makeQuiz() {
                     aa(0)
                 }
             } else {
-                if (!(onlyEnglishQuest)) {
-                    askFormel(i)
-                } else {
-                    var randomNr = Math.round(Math.random());
-                    aa(randomNr)
-                }
+				if (termQuest && descriptionQuest) {
+					askRandom()
+				} else {
+					if (termQuest) {
+						askFormel(i)
+					} else if (descriptionQuest) {
+						askWort(i)
+					} else {
+						askRandom()
+					}
+				}
             }
             score(i)
         }
@@ -340,7 +347,8 @@ function makeCons() {
 function setConstants(green) {
 	SHOW_BRACKETED_CONTENT = green.askBrackedContent
 	ANSWER_SHORTEST_WORD = green.askTheSourtestWord
-	onlyEnglishQuest = green.askOnlyForeignWords
+	descriptionQuest = green.askDescription
+	termQuest = green.askTerm
 }
 
 function startQuiz(green) {

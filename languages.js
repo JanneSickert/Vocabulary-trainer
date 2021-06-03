@@ -20,9 +20,9 @@ var globalText = {
 		resetToDo: " um den fortschritt zurück zu setzen.",
 		keep: "Der fortschritt wurde beibehalten.",
 		tdel: "Der fortschritt wurde gelöscht.",
-		svt: ["Einstellungen", "Nur nach Fremdwörtern Fragen", "Frage nach geklammerten Inhalten",
+		svt: ["Einstellungen", de_KIND[0] + " fragen", "Frage nach geklammerten Inhalten",
 		"Frage nach dem kürtzesten der beiden Wörter", "inglish", "Starte Programme",
-		"Starte Quiz", "Zeige alle Vokabeln", "Dialogfeld Befehle", "Beendet das Dialogfeld"],
+		"Starte Quiz", "Zeige alle Vokabeln", "Dialogfeld Befehle", "Beendet das Dialogfeld", de_KIND[1] + " fragen"],
 		lorv: ["Zurück"]
 	},
 	inglish: {
@@ -43,9 +43,9 @@ var globalText = {
 		resetToDo: " to reset the progress.",
 		keep: "Progress has been maintained.",
 		tdel: "The progress has been deleted.",
-		svt: ["Settings", "Only ask for " + en_KIND[0], "Ask about bracked content",
+		svt: ["Settings", "Ask for " + en_KIND[0], "Ask about bracked content",
 		"Ask for the shortest of the two words", "Deutsch", "start program",
-		"start quiz", "Show all vocabulary", "Commands dialog box", "Exits the dialog box"],
+		"start quiz", "Show all vocabulary", "Commands dialog box", "Exits the dialog box", "Ask for " + en_KIND[1]],
 		lorv: ["back"]
 	}
 }

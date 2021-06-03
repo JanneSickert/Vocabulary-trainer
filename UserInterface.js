@@ -1,10 +1,26 @@
+var interfaceVarReadTrainer
+var interfaceVarSetTrainer
+var len = null
+
 var green = {
-	askOnlyForeignWords: false,
+	askDescription: false,
+	askTerm: false,
 	askBrackedContent: false,
 	askTheSourtestWord: false
 }
 
-var len = null
+var dataAdress = {
+	language: 1001,
+	description: 1002,
+	term: 1003,
+	brackedContent: 1004,
+	shortestWord: 1005
+}
+
+function setInterfaceStorageFoo(readTrainer, setTrainer) {
+    interfaceVarReadTrainer = readTrainer
+    interfaceVarSetTrainer = setTrainer
+}
 
 function changeColor(theColor, id) {
 	var elem = document.getElementById(id)
@@ -12,17 +28,44 @@ function changeColor(theColor, id) {
 }
 
 function setDefaultColor() {
-	changeColor('red', "p1")
-	changeColor('red', "p2")
-	changeColor('red', "p3")
+	if (green.askDescription) {
+		changeColor('green', "p1")
+	} else {
+		changeColor('red', "p1")
+	}
+	if (green.askBrackedContent) {
+		changeColor('green', "p2")
+	} else {
+		changeColor('red', "p2")
+	}
+	if (green.askTheSourtestWord) {
+		changeColor('green', "p3")
+	} else {
+		changeColor('red', "p3")
+	}
+	if (green.askTerm) {
+		changeColor('green', "p5")
+	} else {
+		changeColor('red', "p5")
+	}
 }
 
-function askOnlyForeignWordsButton() {
-	if (green.askOnlyForeignWords) {
-		green.askOnlyForeignWords = false
+function askTermButton() {
+	if (green.askTerm) {
+		green.askTerm = false
+		changeColor('red', "p5")
+	} else {
+		green.askTerm = true
+		changeColor('green', "p5")
+	}
+}
+
+function askDescriptionButton() {
+	if (green.askDescription) {
+		green.askDescription = false
 		changeColor('red', "p1")
 	} else {
-		green.askOnlyForeignWords = true
+		green.askDescription = true
 		changeColor('green', "p1")
 	}
 }
@@ -57,4 +100,46 @@ function jumpBack() {
 
 function jumpToNewVocab() {
 	window.location.href = "NewVocab.html"
+}
+
+function setNewLanguage() {
+	if (len === "de") {
+		interfaceVarSetTrainer(dataAdress.language, "en")
+	} else {
+		interfaceVarSetTrainer(dataAdress.language, "de")
+	}
+	location.reload(true)
+}
+
+function loadUI_settings() {
+	var il
+	il = interfaceVarReadTrainer(dataAdress.language)
+	if (il === "de") {
+		len = "de"
+	} else {
+		len = "en"
+		interfaceVarSetTrainer(dataAdress.language, "en")
+	}
+	il = interfaceVarReadTrainer(dataAdress.description)
+	if (il === "1") {
+		green.askDescription = true
+	}
+	il = interfaceVarReadTrainer(dataAdress.term)
+	if (il === "1") {
+		green.askTerm = true
+	}
+	il = interfaceVarReadTrainer(dataAdress.brackedContent)
+	if (il === "1") {
+		green.askBrackedContent = true
+	}
+	il = interfaceVarReadTrainer(dataAdress.shortestWord)
+	if (il === "1") {
+		green.askTheSourtestWord = true
+	}
+}
+
+function getUI_settings() {// return the green object with the settings data.
+	loadUI_settings()
+	setDefaultColor()
+	return green
 }

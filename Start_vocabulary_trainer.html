@@ -12,7 +12,6 @@
 		<script src="UserInterface.js"></script>
 		<script src="languages.js"></script>
 		<script>
-			setMaxPoints(aPoints)
 			function resetTrainer() {
 				try {
 					localStorage.clear();
@@ -37,31 +36,20 @@
 					alert(globalText.storageError)
 				}
 			}
-			function setNewLanguage() {
-				if (len === "de") {
-					len = "en"
-					setTrainer(1001, "en")
-				} else {
-					len = "de"
-					setTrainer(1001, "de")
-				}
-				location.reload(true)
-			}
-			var il = readTrainer(1001)
-			if (il === "de") {
-				len = "de"
-				setTrainer(1001, "de")
-			} else {
-				len = "en"
-				setTrainer(1001, "en")
-			}
+			
+			setMaxPoints(aPoints)
+			len = readTrainer(dataAdress.language)
 			if (len === "de") {
 				setGlobalText(globalText.deutsch)
 			} else {
 				setGlobalText(globalText.inglish)
 			}
+			setStorageFoo(resetTrainer, readTrainer, setTrainer)
+			setInterfaceStorageFoo(readTrainer, setTrainer)
+			setSize(DATA.length);
+			
 			function uiResetTrainer() {
-				var keyWord = "Reset"
+				const keyWord = "Reset"
 				var o = prompt(globalText.write + keyWord + globalText.resetToDo)
 				if (o === keyWord) {
 					resetTrainer()
@@ -70,15 +58,15 @@
 					alert(globalText.keep)
 				}
 			}
-			setStorageFoo(resetTrainer, readTrainer, setTrainer)
-			setSize(DATA.length);
+			
 			for (var i = 0; i < getSize(); i++) {
 				add(DATA[i][0], DATA[i][1]);
 			}
 			var strTxt = globalText.svt
 		</script>
 			<h2><u><script>document.write(strTxt[0])</script></u></h2>
-				<button id="p1" onclick="askOnlyForeignWordsButton()"><script>document.write(strTxt[1])</script></button><br>
+				<button id="p1" onclick="askDescriptionButton()"><script>document.write(strTxt[1])</script></button><br>
+				<button id="p5" onclick="askTermButton()"><script>document.write(strTxt[10])</script></button><br>
 				<button id="p2" onclick="askBrackedContentButton()"><script>document.write(strTxt[2])</script></button><br>
 		  		<button id="p3" onclick="askTheSourtestWordButton()"><script>document.write(strTxt[3])</script></button><br>
 				<button id="p4" onclick="setNewLanguage()"><script>document.write(strTxt[4])</script></button>
@@ -90,7 +78,7 @@
 			<h2><u><script>document.write(strTxt[8])</script></u></h2>
 			<b>END</b> : <script>document.write(strTxt[9])</script>
 		<script>
-			setDefaultColor()
+			setConstants(getUI_settings())
 		</script>
 	</body>
 </html>
