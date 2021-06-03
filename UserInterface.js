@@ -54,9 +54,11 @@ function askTermButton() {
 	if (green.askTerm) {
 		green.askTerm = false
 		changeColor('red', "p5")
+		interfaceVarSetTrainer(dataAdress.term, "0")
 	} else {
 		green.askTerm = true
 		changeColor('green', "p5")
+		interfaceVarSetTrainer(dataAdress.term, "1")
 	}
 }
 
@@ -64,9 +66,11 @@ function askDescriptionButton() {
 	if (green.askDescription) {
 		green.askDescription = false
 		changeColor('red', "p1")
+		interfaceVarSetTrainer(dataAdress.description, "0")
 	} else {
 		green.askDescription = true
 		changeColor('green', "p1")
+		interfaceVarSetTrainer(dataAdress.description, "1")
 	}
 }
 
@@ -74,9 +78,11 @@ function askBrackedContentButton() {
 	if (green.askBrackedContent) {
 		green.askBrackedContent = false
 		changeColor('red', "p2")
+		interfaceVarSetTrainer(dataAdress.brackedContent, "0")
 	} else {
 		green.askBrackedContent = true
 		changeColor('green', "p2")
+		interfaceVarSetTrainer(dataAdress.brackedContent, "1")
 	}
 }
 
@@ -84,9 +90,11 @@ function askTheSourtestWordButton() {
 	if (green.askTheSourtestWord) {
 		green.askTheSourtestWord = false
 		changeColor('red', "p3")
+		interfaceVarSetTrainer(dataAdress.shortestWord, "0")
 	} else {
 		green.askTheSourtestWord = true
 		changeColor('green', "p3")
+		interfaceVarSetTrainer(dataAdress.shortestWord, "1")
 	}
 }
 
