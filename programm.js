@@ -96,16 +96,20 @@ class Staff {
       this.punkte = 0;
       this.notKnow = true;
     }
-    restorPoints() {
-        var localVar = restore(this.index);
-        this.punkte = parseInt(localVar);
+    restorPoints() {// and set notKnow to false if this vocab have 3 points
+        var localVar = restore(this.index)
+        this.punkte = parseInt(localVar)
+		if (this.punkte == 3) {
+			this.notKnow = false
+		}
     }
     setPointToNull() {
         store(this.index, "0")
     }
     upDownPunkte(str) {
-        if(str==="Up") {
-            if (this.punkte == MAX_POINTS) {
+        if (str==="Up") {
+            if (this.punkte == MAX_POINTS - 1) {
+				this.punkte++
                 this.notKnow = false
             } else {
                 this.punkte++
@@ -117,7 +121,7 @@ class Staff {
         }
         store(this.index, ("" + this.punkte));
     }
-  	get is_Activ() {
+  	get getActiv() {
       return this.notKnow;
     }
     get getFormel() {
@@ -311,7 +315,7 @@ function makeQuiz() {
 		if (!isActiv) {
 			break
 		}
-        if (arr[i].is_Activ) {
+        if (arr[i].getActiv) {
             if (ANSWER_SHORTEST_WORD) {
                 if (arr[i].getFormel.length > arr[i].getWort.length) {
                     aa(1)
