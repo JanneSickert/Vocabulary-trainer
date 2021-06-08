@@ -55,6 +55,9 @@ function askTermButton() {
 		green.askTerm = false
 		changeColor('red', "p5")
 		interfaceVarSetTrainer(dataAdress.term, "0")
+		green.askTheSourtestWord = false
+		changeColor('red', "p3")
+		interfaceVarSetTrainer(dataAdress.shortestWord, "0")
 	} else {
 		green.askTerm = true
 		changeColor('green', "p5")
@@ -67,6 +70,9 @@ function askDescriptionButton() {
 		green.askDescription = false
 		changeColor('red', "p1")
 		interfaceVarSetTrainer(dataAdress.description, "0")
+		green.askTheSourtestWord = false
+		changeColor('red', "p3")
+		interfaceVarSetTrainer(dataAdress.shortestWord, "0")
 	} else {
 		green.askDescription = true
 		changeColor('green', "p1")
@@ -95,6 +101,12 @@ function askTheSourtestWordButton() {
 		green.askTheSourtestWord = true
 		changeColor('green', "p3")
 		interfaceVarSetTrainer(dataAdress.shortestWord, "1")
+		green.askDescription = true
+		changeColor('green', "p1")
+		interfaceVarSetTrainer(dataAdress.description, "1")
+		green.askTerm = true
+		changeColor('green', "p5")
+		interfaceVarSetTrainer(dataAdress.term, "1")
 	}
 }
 
