@@ -22,7 +22,7 @@ var globalText = {
 		tdel: "Der fortschritt wurde gelöscht.",
 		svt: ["Einstellungen", de_KIND[0] + " fragen", "Frage nach geklammerten Inhalten",
 		"Frage nach dem kürtzesten der beiden Wörter", "inglish", "Starte Programme",
-		"Starte Quiz", "Zeige alle Vokabeln", "Dialogfeld Befehle", "Beendet das Dialogfeld", de_KIND[1] + " fragen"],
+		"Starte Quiz", "Zeige alle Vokabeln", "Dialogfeld Befehle", "Beendet das Dialogfeld", de_KIND[1] + " fragen", "Erlaube mehrere Antwortmöglichkeiten"],
 		lorv: ["Zurück"]
 	},
 	inglish: {
@@ -45,7 +45,7 @@ var globalText = {
 		tdel: "The progress has been deleted.",
 		svt: ["Settings", "Ask for " + en_KIND[0], "Ask about bracked content",
 		"Ask for the shortest of the two words", "Deutsch", "start program",
-		"start quiz", "Show all vocabulary", "Commands dialog box", "Exits the dialog box", "Ask for " + en_KIND[1]],
+		"start quiz", "Show all vocabulary", "Commands dialog box", "Exits the dialog box", "Ask for " + en_KIND[1], "Allow multiple answer options."],
 		lorv: ["back"]
 	}
 }

@@ -6,7 +6,8 @@ var green = {
 	askDescription: false,
 	askTerm: false,
 	askBrackedContent: false,
-	askTheSourtestWord: false
+	askTheSourtestWord: false,
+	multipleAnswerOptions: false
 }
 
 var dataAdress = {
@@ -14,7 +15,8 @@ var dataAdress = {
 	description: 1002,
 	term: 1003,
 	brackedContent: 1004,
-	shortestWord: 1005
+	shortestWord: 1005,
+	multipleAnswer: 1006
 }
 
 function setInterfaceStorageFoo(readTrainer, setTrainer) {
@@ -48,6 +50,11 @@ function setDefaultColor() {
 	} else {
 		changeColor('red', "p5")
 	}
+	if (green.multipleAnswerOptions) {
+		changeColor('green', "p6")
+	} else {
+		changeColor('red', "p6")
+	}
 }
 
 function askTermButton() {
@@ -77,6 +84,18 @@ function askDescriptionButton() {
 		green.askDescription = true
 		changeColor('green', "p1")
 		interfaceVarSetTrainer(dataAdress.description, "1")
+	}
+}
+
+function multipleAnswerOptionsButton() {
+	if (green.multipleAnswerOptions) {
+		green.multipleAnswerOptions = false
+		changeColor('red', "p6")
+		interfaceVarSetTrainer(dataAdress.multipleAnswer, "0")
+	} else {
+		green.multipleAnswerOptions = true
+		changeColor('green', "p6")
+		interfaceVarSetTrainer(dataAdress.multipleAnswer, "1")
 	}
 }
 
@@ -155,6 +174,10 @@ function loadUI_settings() {
 	il = interfaceVarReadTrainer(dataAdress.shortestWord)
 	if (il === "1") {
 		green.askTheSourtestWord = true
+	}
+	il = interfaceVarReadTrainer(dataAdress.multipleAnswer)
+	if (il === "1") {
+		green.multipleAnswerOptions = true
 	}
 }
 

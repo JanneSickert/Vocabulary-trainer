@@ -16,6 +16,7 @@ var unchecktArr = []
 var varResetTrainer
 var varReadTrainer
 var varSetTrainer
+var multipleAnswerOptions
 
 function setGlobalText(pText) {
 	globalText = pText
@@ -186,7 +187,7 @@ function LongAnswer() {
 
 function optsCheck(system, user) {
   var longAns = new LongAnswer()
-  if (contains(system, ",")) {
+  if (contains(system, ",") && multipleAnswerOptions) {
     var options = system.split(", ")
     for (var i = 0; i < options.length; i++) {
       if (user === options[i]) {
@@ -348,6 +349,7 @@ function setConstants(green) {
 	ANSWER_SHORTEST_WORD = green.askTheSourtestWord
 	descriptionQuest = green.askDescription
 	termQuest = green.askTerm
+	multipleAnswerOptions = green.multipleAnswerOptions
 }
 
 function startQuiz(green) {
