@@ -274,7 +274,6 @@ function updateCurrentPoints() {
 	countAllCurrentPoints()
 	if (getSize() <= currentPoints) {
 		if (nextMessageSent) {
-			descriptionQuest = true
 			alert(globalText.nextLevel)
 			nextMessageSent = false
 		}
