@@ -194,7 +194,7 @@ function Options() {
 			while (allPosibleAnswers.length < fakulteat(systemArr.length)) {
 				var next = []
 				while (next.length < systemArr.length) {
-					var rw = systemArr[Math.round(Math.random() * systemArr.length)]
+					var rw = systemArr[Math.round(Math.random() * (systemArr.length - 1))]
 					if (!(existInArray(rw, next))) {
 						next.push(rw)
 					}
