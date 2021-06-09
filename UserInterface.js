@@ -7,7 +7,8 @@ var green = {
 	askTerm: false,
 	askBrackedContent: false,
 	askTheSourtestWord: false,
-	multipleAnswerOptions: false
+	multipleAnswerOptions: false,
+	differentOptionsActiv: false
 }
 
 var dataAdress = {
@@ -16,7 +17,8 @@ var dataAdress = {
 	term: 1003,
 	brackedContent: 1004,
 	shortestWord: 1005,
-	multipleAnswer: 1006
+	multipleAnswer: 1006,
+	differentOptionsActiv: 1007
 }
 
 function setInterfaceStorageFoo(readTrainer, setTrainer) {
@@ -55,6 +57,11 @@ function setDefaultColor() {
 	} else {
 		changeColor('red', "p6")
 	}
+	if (green.differentOptionsActiv) {
+		changeColor('green', "p7")
+	} else {
+		changeColor('red', "p7")
+	}
 }
 
 function askTermButton() {
@@ -87,6 +94,23 @@ function askDescriptionButton() {
 	}
 }
 
+function differentOptionsActivButton() {
+	if (green.differentOptionsActiv) {
+		green.differentOptionsActiv = false
+		changeColor('red', "p7")
+		interfaceVarSetTrainer(dataAdress.differentOptionsActiv, "0")
+	} else {
+		green.differentOptionsActiv = true
+		changeColor('green', "p7")
+		interfaceVarSetTrainer(dataAdress.differentOptionsActiv, "1")
+		if (green.multipleAnswerOptions) {
+			green.multipleAnswerOptions = false
+			changeColor('red', "p6")
+			interfaceVarSetTrainer(dataAdress.multipleAnswer, "0")
+		}
+	}
+}
+
 function multipleAnswerOptionsButton() {
 	if (green.multipleAnswerOptions) {
 		green.multipleAnswerOptions = false
@@ -96,6 +120,11 @@ function multipleAnswerOptionsButton() {
 		green.multipleAnswerOptions = true
 		changeColor('green', "p6")
 		interfaceVarSetTrainer(dataAdress.multipleAnswer, "1")
+		if (green.differentOptionsActiv) {
+			green.differentOptionsActiv = false
+			changeColor('red', "p7")
+			interfaceVarSetTrainer(dataAdress.differentOptionsActiv, "0")
+		}
 	}
 }
 
@@ -178,6 +207,10 @@ function loadUI_settings() {
 	il = interfaceVarReadTrainer(dataAdress.multipleAnswer)
 	if (il === "1") {
 		green.multipleAnswerOptions = true
+	}
+	il = interfaceVarReadTrainer(dataAdress.differentOptionsActiv)
+	if (il === "1") {
+		green.differentOptionsActiv = true
 	}
 }
 

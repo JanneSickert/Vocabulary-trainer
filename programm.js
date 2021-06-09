@@ -16,6 +16,7 @@ var unchecktArr = []
 var varResetTrainer
 var varReadTrainer
 var varSetTrainer
+var differentOptionsActiv
 var multipleAnswerOptions
 
 function setGlobalText(pText) {
@@ -145,79 +146,163 @@ function add(formel, wort) {
 	unchecktArr.push([formel, wort])
 }
 
-function contains(str, partChar) {
+
+function Options() {
+	
+	const DELIMITER = ", "
+	
+	function Different() {
+		
+		this.system = null
+		this.user = null
+		
+		this.checkOptions = function() {
+			for (var i = 0; i < this.system.length; i++) {
+				if (this.system[i] === this.user) {
+					return true
+				}
+			}
+			return false
+		}
+	}
+
+
+	function Multiple() {
+		
+		var allPosibleAnswers = []
+		var systemArr
+		var userArr
+		
+		function existInArray(str, arr) {
+			for (var i = 0; i < arr.length; i++) {
+				if (arr[i] === str) {
+					return true
+				}
+			}
+			return false
+		}
+		
+		function fakulteat(len) {
+			var erg = len
+			for (var i = len - 1; i > 0; i--) {
+				erg = erg * i
+			}
+			return erg
+		}
+		
+		function createArrOfAllPosibleAnswers() {
+			while (allPosibleAnswers.length < fakulteat(systemArr.length)) {
+				var next = []
+				while (next.length < systemArr.length) {
+					var rw = systemArr[Math.round(Math.random() * systemArr.length)]
+					if (!(existInArray(rw, next))) {
+						next.push(rw)
+					}
+				}
+				allPosibleAnswers.push(next)
+			}
+		}
+		
+		function addSpaceAfterComma(str) {
+			var resultStr = ""
+			for (var i = 0; i < str.length; i++) {
+				if (str[i] === ",") {
+					resultStr = resultStr + str[i] + " "
+				} else {
+					resultStr = resultStr + str[i]
+				}
+			}
+			return resultStr
+		}
+		
+		this.setData = function(system, user) {
+			systemArr = system
+			userArr = user
+		}
+		
+		this.check = function() {
+			var possibleAnswers = []
+			var userAnswer = addSpaceAfterComma(userArr.toString())
+			allPosibleAnswers.forEach(function (phrase) {
+				var str = phrase.toString()
+				possibleAnswers.push(addSpaceAfterComma(str))
+			});
+			for (var i = 0; i < possibleAnswers.length; i++) {
+				if (possibleAnswers[i] === userAnswer) {
+					return true
+				}
+			}
+			return false
+		}
+	}
+
+
+	var different = new Different()
+	var multiple = new Multiple()
+
+	function contains(str) {
+		var partStr = DELIMITER
+		var len = str.length - 1
+		for (var i = 0; i < len; i++) {
+			if (str[i] === partStr[0] && str[i + 1] === partStr[1]) {
+				return true
+			}
+		}
+		return false
+	}
+	
+	this.differentOptions = function(system, user) {
+		if (contains(system)) {
+			different.system = system.split(DELIMITER)
+			different.user = user
+			return (different.checkOptions())
+		} else {
+			return (system === user)
+		}
+	}
+	
+	this.multipleAnswerOptions = function(system, user) {
+		if (contains(system) && contains(user) && system.length == user.length) {
+			multiple.setData(system.split(DELIMITER), user.split(DELIMITER))
+			var b = multiple.check()
+			return b
+		} else {
+			return (system === user)
+		}
+	}
+}
+
+
+function optsCheck(system, user) {
+	var opt = new Options()
+	if (differentOptionsActiv) {
+		return (opt.differentOptions(system, user))
+	} else if (multipleAnswerOptions) {
+		return (opt.multipleAnswerOptions(system, user))
+	} else {
+		return (system === user)
+	}
+}
+
+function containsEql(str, mchar) {
 	for (var i = 0; i < str.length; i++) {
-		if (str[i]===partChar) {
+		if (str[i] === mchar) {
 			return true
 		}
 	}
 	return false
 }
 
-function LongAnswer() {
-  this.oneWord = function(user, system) {
-    if (system.length > 8) {
-      var sameWords = 0
-      var words = system.split(" ")
-      var copy = Object.assign({}, words)
-      var len = words.length
-      for (var i = 0; i < len; i++) {
-        for (var k = 0; k < len; k++) {
-          if (!(i==k)) {
-            if (words[i]===copy[k]) {
-              sameWords++
-            }
-          }
-        }
-      }
-      sameWords = sameWords / 2
-      if (sameWords >= (words.length / 2)) {
-        return true
-      } else {
-        return false
-      }
-    } else {
-      return (user===system)
-    }
-  }
-  this.arr = function(user, system) {
-    for (var i = 0; i < system.length; i++) {
-      if (this.oneWord(user, system[i])) {
-        return true
-      }
-    }
-  }
-}
-
-function optsCheck(system, user) {
-  var longAns = new LongAnswer()
-  if (contains(system, ",") && multipleAnswerOptions) {
-    var options = system.split(", ")
-    for (var i = 0; i < options.length; i++) {
-      if (user === options[i]) {
-        return true
-      }
-    }
-    return (longAns.arr(user, options))
-  } else {
-    if (user === system) {
-      return true
-    } else {
-      return (longAns.oneWord(user, system))
-    }
-  }
-}
-
-function eql(user, system) {
+function eql(user, system) {// Just looking for cling
 	if (!(SHOW_BRACKETED_CONTENT)) {
-		if (contains(system, "(")) {
+		if (containsEql(system, "(")) {
 			var update = system.split("(")
 			return (optsCheck(update[0], user))
 		} else {
-      return (optsCheck(system, user))
+			return (optsCheck(system, user))
 		}
 	} else {
-    return (optsCheck(system, user))
+		return (optsCheck(system, user))
 	}
 }
 
@@ -354,6 +439,7 @@ function setConstants(green) {
 	descriptionQuest = green.askDescription
 	termQuest = green.askTerm
 	multipleAnswerOptions = green.multipleAnswerOptions
+	differentOptionsActiv = green.differentOptionsActiv
 }
 
 function startQuiz(green) {
