@@ -1,2 +1,2 @@
-var cdb = [["aa", "bb, bbb"], ["cc", "dd, ddd, dddd"], ["ee", "1fff, 2fff, 3fff"]]
+var cdb = [["aa, bb, cc", "Type aa, bb, cc"]]
 var DATA = cdb

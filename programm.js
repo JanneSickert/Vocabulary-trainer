@@ -13,7 +13,6 @@ var data_length
 var nextIndex = 0
 var interval = 1
 var unchecktArr = []
-var varResetTrainer
 var varReadTrainer
 var varSetTrainer
 var differentOptionsActiv
@@ -182,6 +181,21 @@ function Options() {
 			return false
 		}
 		
+		function existInAllPosibleAnswers(next) {
+			for (var i = 0; i < allPosibleAnswers.length; i++) {
+				var s = 0
+				for (var k = 0; k < next.length; k++) {
+					if (allPosibleAnswers[i][k] === next[k]) {
+						s++
+					}
+				}
+				if (s == next.length) {
+					return true
+				}
+			}
+			return false
+		}
+		
 		function fakulteat(len) {
 			var erg = len
 			for (var i = len - 1; i > 0; i--) {
@@ -199,7 +213,9 @@ function Options() {
 						next.push(rw)
 					}
 				}
-				allPosibleAnswers.push(next)
+				if (!(existInAllPosibleAnswers(next))) {
+					allPosibleAnswers.push(next)
+				}
 			}
 		}
 		
@@ -223,6 +239,7 @@ function Options() {
 		this.check = function() {
 			var possibleAnswers = []
 			var userAnswer = addSpaceAfterComma(userArr.toString())
+			createArrOfAllPosibleAnswers()
 			allPosibleAnswers.forEach(function (phrase) {
 				var str = phrase.toString()
 				possibleAnswers.push(addSpaceAfterComma(str))
@@ -348,7 +365,6 @@ function exam() {
     if (completePoints >= maxCompletePoints) {
         nochZuLernen = false;
 		alert(globalText.finish);
-        varResetTrainer()
     }
     return nochZuLernen;
 }
